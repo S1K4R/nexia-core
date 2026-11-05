@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import Logo from "./Logo";
+import LogoFull from "./LogoFull";
 
 const links = [
   { id: "inicio", label: "Inicio" },
@@ -55,10 +55,9 @@ export default function Header() {
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${dark ? "bg-carbon/95 text-white backdrop-blur" : "bg-transparent text-carbon"}`}>
       <nav aria-label="Principal" className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-        <a href="/" className="flex items-center gap-2 font-titulo text-lg font-bold" onClick={goHome}>
+        <a href="/" aria-label="Nexia Core, volver al inicio" className="flex items-center rounded bg-white px-2 py-1 shadow-sm ring-1 ring-black/5" onClick={goHome}>
           {/* LOGO: reemplazar public/logo.png por el logo definitivo */}
-          <Logo size={36} />
-          Nexia <span className={dark ? "text-amarillo" : ""}>Core</span>
+          <LogoFull height={36} className="h-9 w-auto" />
         </a>
         <ul className="hidden items-center gap-1 md:flex">
           {links.map((l) => (

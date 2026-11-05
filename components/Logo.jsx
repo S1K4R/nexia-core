@@ -1,8 +1,8 @@
 import Image from "next/image";
 
-// LOGO: reemplazar public/logo.png por el logo definitivo
+// Ícono cuadrado "N". LOGO: reemplazar public/logo-icon.png por el definitivo
 export default function Logo({ size = 40, className = "" }) {
   return (
-    <Image src="/logo.png" alt="Logo de Nexia Core" width={size} height={size} className={`rounded ${className}`} priority />
+    <Image src="/logo-icon.png" alt="Logo de Nexia Core" width={size} height={size} className={`rounded ${className}`} priority />
   );
 }
