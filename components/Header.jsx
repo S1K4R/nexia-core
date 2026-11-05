@@ -41,11 +41,21 @@ export default function Header() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  // Logo: recarga la página y la deja arriba
+  const goHome = (e) => {
+    e.preventDefault();
+    setOpen(false);
+    window.history.scrollRestoration = "manual";
+    window.history.replaceState(null, "", "/");
+    window.scrollTo(0, 0);
+    window.location.reload();
+  };
+
   const dark = scrolled || open;
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${dark ? "bg-carbon/95 text-white backdrop-blur" : "bg-transparent text-carbon"}`}>
       <nav aria-label="Principal" className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-        <a href="#inicio" className="flex items-center gap-2 font-titulo text-lg font-bold" onClick={() => setOpen(false)}>
+        <a href="/" className="flex items-center gap-2 font-titulo text-lg font-bold" onClick={goHome}>
           {/* LOGO: reemplazar public/logo.png por el logo definitivo */}
           <Logo size={36} />
           Nexia <span className={dark ? "text-amarillo" : ""}>Core</span>
