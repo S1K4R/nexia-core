@@ -48,7 +48,7 @@ El archivo `.env.local` no se sube al repositorio.
 
 ## Cómo poner el logo
 
-`public/logo.png` es un **marcador provisional**. Reemplázalo por el logo definitivo (PNG transparente de al menos 1000 px de ancho, o SVG) y ejecuta:
+`public/logo-icon.png` es el ícono cuadrado (favicon) y `public/logo.png` el logo principal. Para cambiarlos reemplaza esos archivos (PNG de al menos 1000 px de ancho) y ejecuta:
 
 ```bash
 npm run brand
