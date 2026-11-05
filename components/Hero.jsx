@@ -27,7 +27,7 @@ export default function Hero() {
             Integramos tus sistemas de producción aislados para capturar, analizar y predecir datos en tiempo real, aumentando la rentabilidad y eliminando los tiempos de inactividad.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href="#fases" className="inline-flex min-h-12 items-center gap-2 rounded bg-amarillo px-6 font-bold text-carbon transition hover:-translate-y-0.5 hover:shadow-lg">
+            <a href="#fases" className="btn-accent inline-flex min-h-12 items-center gap-2 rounded bg-amarillo px-6 font-bold text-carbon">
               Descubrir Soluciones <ArrowRight size={18} />
             </a>
             <a href={waLink(config.mensajeDemo)} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center gap-2 rounded border-2 border-carbon px-6 font-bold transition hover:bg-carbon hover:text-white">

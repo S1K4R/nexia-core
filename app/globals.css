@@ -37,3 +37,26 @@ section[id] { scroll-margin-top: 5rem; }
   .flow-line, .pulse-node { animation: none; }
   *, *::before, *::after { transition-duration: 0.01ms !important; }
 }
+
+/* Cursor y estados de interacción */
+button:not(:disabled),
+[role="button"],
+a[href],
+label:has(input[type="radio"]),
+summary {
+  cursor: pointer;
+}
+button:disabled { cursor: not-allowed; }
+
+.btn-accent {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+.btn-accent:hover:not(:disabled) {
+  background-color: #ffbe2e;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(38, 41, 44, 0.25);
+}
+.btn-accent:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
+}

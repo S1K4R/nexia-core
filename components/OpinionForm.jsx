@@ -78,7 +78,7 @@ export default function OpinionForm() {
         <legend className="text-sm font-semibold">Valoración</legend>
         <div role="radiogroup" aria-label="Valoración de 1 a 5 estrellas" className="mt-1 flex">
           {[1, 2, 3, 4, 5].map((v) => (
-            <label key={v} className="cursor-pointer p-1">
+            <label key={v} className="cursor-pointer p-1 transition hover:scale-110">
               <input type="radio" name="rating" value={v} checked={rating === v} onChange={() => setRating(v)} className="peer sr-only" aria-label={`${v} ${v === 1 ? "estrella" : "estrellas"}`} />
               <Star size={32} className={`rounded transition peer-focus-visible:outline peer-focus-visible:outline-[3px] peer-focus-visible:outline-amarillo ${v <= rating ? "fill-amarillo text-carbon" : "text-carbon/40"}`} />
             </label>
@@ -91,7 +91,7 @@ export default function OpinionForm() {
         <textarea id="comentario" rows={4} value={comentario} onChange={(e) => setComentario(e.target.value)} className={field} aria-invalid={!!errors.comentario} aria-describedby={errors.comentario ? "comentario-err" : undefined} />
         {err("comentario")}
       </div>
-      <button type="submit" disabled={status === "sending"} className="mt-5 inline-flex min-h-12 items-center gap-2 rounded bg-amarillo px-6 font-bold text-carbon transition hover:shadow-lg disabled:opacity-60">
+      <button type="submit" disabled={status === "sending"} className="mt-5 btn-accent inline-flex min-h-12 items-center gap-2 rounded bg-amarillo px-6 font-bold text-carbon disabled:opacity-60">
         <Send size={18} /> {status === "sending" ? "Enviando..." : "Enviar opinión"}
       </button>
       <div role="status" aria-live="polite" className="mt-3 text-sm">
