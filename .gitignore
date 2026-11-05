@@ -1,0 +1,15 @@
+node_modules
+.next
+out
+.env*
+.vercel
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+.idea
+.vscode
+.claude
+graphify-out
+
+!.env.example

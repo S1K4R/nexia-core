@@ -1,0 +1,25 @@
+{
+  "name": "nexia-core",
+  "version": "1.0.0",
+  "description": "Landing page de Nexia Core (empresa ficticia, trabajo universitario de Gestión del Conocimiento)",
+  "private": true,
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "brand": "node scripts/generate-brand-assets.mjs"
+  },
+  "dependencies": {
+    "lucide-react": "latest",
+    "motion": "latest",
+    "next": "^15",
+    "react": "^19",
+    "react-dom": "^19"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "sharp": "latest",
+    "tailwindcss": "^4"
+  }
+}
