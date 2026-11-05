@@ -5,12 +5,12 @@ El formulario ya funciona solo con Web3Forms. Si además quieres que cada opini�
 ## Pasos
 
 1. Abre la hoja de cálculo de destino con tu cuenta de Google.
-2. Crea (o renombra) una pestaña llamada **Respuestas**. En la fila 1 escribe: `Fecha | Nombre | Empresa o cargo | Valoración | Comentario`.
+2. Usa la pestaña llamada **Feedback_Clientes** (si no existe, créala con ese nombre exacto). En la fila 1 escribe: `Fecha | Nombre | Empresa o cargo | Valoración | Comentario`.
 3. Menú **Extensiones → Apps Script**. Borra el código y pega esto:
 
 ```js
 function doPost(e) {
-  var hoja = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Respuestas");
+  var hoja = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Feedback_Clientes");
   var d = JSON.parse(e.postData.contents);
   // Descarta el campo trampa y los envíos vacíos
   if (d.botcheck || !d.nombre || !d.comentario) {
