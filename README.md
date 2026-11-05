@@ -16,7 +16,7 @@ Next.js 15 (App Router) · React 19 · Tailwind CSS v4 · motion · lucide-react
 app/          layout, página, estilos, robots, sitemap, iconos
 components/   secciones y piezas de la página
 lib/config.js datos editables (WhatsApp, correo, redes...)
-scripts/      generador de logo derivado (npm run brand)
+tools/        generador de logo derivado (npm run brand)
 docs/         guía de Google Sheets
 public/       logo.png (provisional), og.png
 ```

@@ -1,15 +1,30 @@
+# Dependencias y build
 node_modules
 .next
 out
+coverage
+*.tsbuildinfo
+next-env.d.ts
+
+# Secretos y variables de entorno (solo se sube .env.example)
 .env*
+!.env.example
+*.pem
+*.key
+
+# Vercel
 .vercel
+
+# Logs
 *.log
 npm-debug.log*
+
+# Sistema y editores
 .DS_Store
 Thumbs.db
 .idea
 .vscode
+
+# Herramientas locales
 .claude
 graphify-out
-
-!.env.example
