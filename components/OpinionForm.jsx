@@ -1,13 +1,13 @@
 "use client";
 import { useRef, useState } from "react";
 import { Star, Send, CheckCircle2, AlertTriangle } from "lucide-react";
-import { config, waLink } from "@/lib/config";
 
 export default function OpinionForm() {
   const [nombre, setNombre] = useState("");
   const [empresa, setEmpresa] = useState("");
   const [rating, setRating] = useState(0);
   const [comentario, setComentario] = useState("");
+  const [trap, setTrap] = useState("");
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error
   const lock = useRef(false);
@@ -30,28 +30,21 @@ export default function OpinionForm() {
     setStatus("sending");
     const data = { nombre: nombre.trim(), empresa: empresa.trim(), valoracion: rating, comentario: comentario.trim() };
     try {
-      const key = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
-      const sheets = process.env.NEXT_PUBLIC_SHEETS_URL;
-      if (key) {
-        // Copia opcional a Google Sheets (no bloquea el envío principal)
+      // Campo trampa: si un bot lo llena, simulamos éxito sin enviar nada
+      if (!trap) {
+        const key = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
+        const sheets = process.env.NEXT_PUBLIC_SHEETS_URL;
+        if (!key) throw new Error("sin-clave");
         if (sheets) {
           fetch(sheets, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(data) }).catch(() => {});
         }
         const res = await fetch("https://api.web3forms.com/submit", {
           method: "POST",
           headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify({
-            access_key: key,
-            subject: "Nueva opinión - Nexia Core",
-            from_name: "Web Nexia Core",
-            ...data,
-          }),
+          body: JSON.stringify({ access_key: key, subject: "Nueva opinión - Nexia Core", from_name: "Web Nexia Core", ...data }),
         });
         const json = await res.json();
         if (!json.success) throw new Error("web3forms");
-      } else {
-        const msg = `Opinión sobre Nexia Core\nNombre: ${data.nombre}\nEmpresa/cargo: ${data.empresa || "-"}\nValoración: ${data.valoracion}/5\nComentario: ${data.comentario}`;
-        window.open(waLink(msg), "_blank", "noopener,noreferrer");
       }
       setStatus("sent");
       setNombre(""); setEmpresa(""); setRating(0); setComentario("");
@@ -66,8 +59,12 @@ export default function OpinionForm() {
   const err = (id) => (errors[id] ? <p id={`${id}-err`} className="mt-1 text-sm font-medium text-red-700">{errors[id]}</p> : null);
 
   return (
-    <form onSubmit={onSubmit} noValidate className="rounded-lg border border-estructura bg-white p-6 shadow-sm">
+    <form onSubmit={onSubmit} noValidate className="relative overflow-hidden rounded-lg border border-estructura bg-white p-6 shadow-sm">
       <h3 className="text-xl font-bold">Cuéntanos tu opinión</h3>
+      <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+        <label htmlFor="sitio-web">No llenar este campo</label>
+        <input id="sitio-web" name="botcheck" tabIndex={-1} autoComplete="off" value={trap} onChange={(e) => setTrap(e.target.value)} />
+      </div>
       <div className="mt-4">
         <label htmlFor="nombre" className="text-sm font-semibold">Nombre</label>
         <input id="nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} className={field} autoComplete="name" aria-invalid={!!errors.nombre} aria-describedby={errors.nombre ? "nombre-err" : undefined} />
@@ -98,7 +95,7 @@ export default function OpinionForm() {
         <Send size={18} /> {status === "sending" ? "Enviando..." : "Enviar opinión"}
       </button>
       <div role="status" aria-live="polite" className="mt-3 text-sm">
-        {status === "sent" && <p className="flex items-center gap-2 font-semibold text-green-800"><CheckCircle2 size={18} /> ¡Gracias! Recibimos tu opinión.</p>}
+        {status === "sent" && <p className="flex items-center gap-2 font-semibold text-green-800"><CheckCircle2 size={18} /> Gracias, recibimos tu comentario</p>}
         {status === "error" && <p className="flex items-center gap-2 font-semibold text-red-700"><AlertTriangle size={18} /> No se pudo enviar. Inténtalo de nuevo.</p>}
       </div>
     </form>

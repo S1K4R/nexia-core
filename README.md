@@ -25,7 +25,7 @@ public/       logo.png (provisional), og.png
 
 ```bash
 npm install
-cp .env.example .env   # y completa los valores
+cp .env.example .env.local   # y completa los valores
 npm run dev
 ```
 
@@ -41,10 +41,10 @@ Variables de entorno (ver `.env.example`):
 
 | Variable | Uso |
 | --- | --- |
-| `NEXT_PUBLIC_WEB3FORMS_KEY` | Access Key de Web3Forms. Si falta, el formulario abre WhatsApp con la opinión. |
+| `NEXT_PUBLIC_WEB3FORMS_KEY` | Access Key de Web3Forms. Obligatoria: sin ella el formulario muestra error al enviar. |
 | `NEXT_PUBLIC_SHEETS_URL` | Opcional. URL del Apps Script para guardar también en Google Sheets ([guía](docs/google-sheets.md)). |
 
-El archivo `.env` no se sube al repositorio.
+El archivo `.env.local` no se sube al repositorio.
 
 ## Cómo poner el logo
 

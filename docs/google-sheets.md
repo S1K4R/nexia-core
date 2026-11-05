@@ -12,6 +12,10 @@ El formulario ya funciona solo con Web3Forms. Si además quieres que cada opini�
 function doPost(e) {
   var hoja = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Respuestas");
   var d = JSON.parse(e.postData.contents);
+  // Descarta el campo trampa y los envíos vacíos
+  if (d.botcheck || !d.nombre || !d.comentario) {
+    return ContentService.createTextOutput("ignorado");
+  }
   hoja.appendRow([new Date(), d.nombre, d.empresa, d.valoracion, d.comentario]);
   return ContentService.createTextOutput("ok");
 }
@@ -22,7 +26,7 @@ function doPost(e) {
    - Quién tiene acceso: **Cualquier persona**.
 5. Autoriza los permisos cuando Google los pida y copia la **URL de la aplicación web** (termina en `/exec`).
 6. Pega esa URL en la variable de entorno `NEXT_PUBLIC_SHEETS_URL`:
-   - En local: en el archivo `.env`.
+   - En local: en el archivo `.env.local`.
    - En Vercel: **Settings → Environment Variables**, y vuelve a desplegar.
 
 Si cambias el código del script, crea una **nueva versión** de la implementación (la URL se mantiene).
