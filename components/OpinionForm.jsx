@@ -36,8 +36,14 @@ export default function OpinionForm() {
         const sheets = process.env.NEXT_PUBLIC_SHEETS_URL;
         if (!key) throw new Error("sin-clave");
         if (sheets) {
-          fetch(sheets, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(data) }).catch(() => {});
-        }
+            fetch(sheets, {
+              method: "POST",
+              headers: {
+                "Content-Type": "text/plain;charset=utf-8",
+              },
+              body: JSON.stringify(data),
+            }).catch(() => {});
+          }
         const res = await fetch("https://api.web3forms.com/submit", {
           method: "POST",
           headers: { "Content-Type": "application/json", Accept: "application/json" },
